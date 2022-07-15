@@ -185,7 +185,7 @@ def get_readable_message():
             buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
             button = InlineKeyboardMarkup(buttons.build_menu(2))
             return msg + bmsg, button
-        return msg + bmsg, button
+        return msg + bmsg, ""
 
 def turn(data):
     try:
