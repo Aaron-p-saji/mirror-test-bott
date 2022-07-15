@@ -124,9 +124,6 @@ def get_readable_message():
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
             msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>"
             msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
-            buttons = ButtonMaker()
-            buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
-            sts_button = InlineKeyboardMarkup(buttons.build_menu(2))
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
                 MirrorStatus.STATUS_EXTRACTING,
@@ -181,6 +178,9 @@ def get_readable_message():
                 elif 'MB/s' in spd:
                     upspeed_bytes += float(spd.split('M')[0]) * 1048576
         bmsg += f"\n<b>DL:</b> {get_readable_file_size(dlspeed_bytes)}/s | <b>UL:</b> {get_readable_file_size(upspeed_bytes)}/s"
+            buttons = ButtonMaker()
+            buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
+            sts_button = InlineKeyboardMarkup(buttons.build_menu(2))
         if STATUS_LIMIT is not None and tasks > STATUS_LIMIT:
             msg += f"<b>Page:</b> {PAGE_NO}/{pages} | <b>Tasks:</b> {tasks}\n"
             buttons = ButtonMaker()
