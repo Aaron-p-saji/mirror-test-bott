@@ -124,6 +124,8 @@ def get_readable_message():
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
             msg += f"<b>Name:</b> <code>{escape(str(download.name()))}</code>"
             msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
+            buttons = ButtonMaker()
+            buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
                 MirrorStatus.STATUS_EXTRACTING,
@@ -170,12 +172,8 @@ def get_readable_message():
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if 'K' in spd:
                     dlspeed_bytes += float(spd.split('K')[0]) * 1024
-                    buttons = ButtonMaker()
-                    buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
                 elif 'M' in spd:
-                    dlspeed_bytes += float(spd.split('M')[0]) * 1048576
-                    buttons = ButtonMaker()
-                    buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot") 
+                    dlspeed_bytes += float(spd.split('M')[0]) * 1048576 
             elif download.status() == MirrorStatus.STATUS_UPLOADING:
                 if 'KB/s' in spd:
                     upspeed_bytes += float(spd.split('K')[0]) * 1024
