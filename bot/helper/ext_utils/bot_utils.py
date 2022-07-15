@@ -170,8 +170,12 @@ def get_readable_message():
             if download.status() == MirrorStatus.STATUS_DOWNLOADING:
                 if 'K' in spd:
                     dlspeed_bytes += float(spd.split('K')[0]) * 1024
+                    buttons = ButtonMaker()
+                    buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
                 elif 'M' in spd:
                     dlspeed_bytes += float(spd.split('M')[0]) * 1048576
+                    buttons = ButtonMaker()
+                    buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot") 
             elif download.status() == MirrorStatus.STATUS_UPLOADING:
                 if 'KB/s' in spd:
                     upspeed_bytes += float(spd.split('K')[0]) * 1024
