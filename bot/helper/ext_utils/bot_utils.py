@@ -126,7 +126,7 @@ def get_readable_message():
             msg += f"\n<b>Status:</b> <i>{download.status()}</i>"
             buttons = ButtonMaker()
             buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
-            button = InlineKeyboardMarkup(buttons.build_menu(2))
+            sts_button = InlineKeyboardMarkup(buttons.build_menu(2))
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
                 MirrorStatus.STATUS_EXTRACTING,
@@ -186,9 +186,9 @@ def get_readable_message():
             buttons = ButtonMaker()
             buttons.sbutton("Previous", "status pre")
             buttons.sbutton("Next", "status nex")
-            button += InlineKeyboardMarkup(buttons.build_menu(2))
+            button = InlineKeyboardMarkup(buttons.build_menu(2))
             return msg + bmsg, button
-        return msg + bmsg, ""
+        return msg + bmsg, "", sts_button
 
 def turn(data):
     try:
