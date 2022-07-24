@@ -123,13 +123,13 @@ def info(update, context):
     sendMarkup(info_string, context.bot, update.message, reply_markup)
 
 def infocc(update, context):
-    cpuUsage = cpu_percent(interval=0.5)
-    mem_p = memory.percent
-    total, used, free, disk = disk_usage('/')
+    icpuUsage = cpu_percent(interval=0.5)
+    imem_p = memory.percent
+    itotal, iused, ifree, idisk = disk_usage('/')
     
-    infoss = f'CPU: {cpuUsage}%\n' \
-             f'RAM: {mem_p}%\n' \
-             f'DISK: {disk}%\n\n'
+    infoss = f'CPU: {icpuUsage}%\n' \
+             f'RAM: {imem_p}%\n' \
+             f'DISK: {idisk}%\n\n'
     query = update.callback_query
     message = query.message
     user_id = query.from_user.id
