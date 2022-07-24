@@ -129,10 +129,7 @@ def infocc(update, context):
     user_id = query.from_user.id
     data = query.data
     data = data.split()
-    if user_id == message.from_user.id:
-        query.answer(text="Not Yours!", show_alert=True)
-    else:
-        query.answer(text="Not Yours!12", show_alert=True)
+    query.answer(text="Not Yours!", show_alert=True)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
