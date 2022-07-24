@@ -64,10 +64,6 @@ def stats(update, context):
             f'<b>Memory Free:</b> {mem_a}\n' \
             f'<b>Memory Used:</b> {mem_u}\n'
     sendMessage(stats, context.bot, update.message)
-    infoss = f'CPU: {cpuUsage}%\n' \
-             f'RAM: {mem_p}%\n' \
-             f'DISK: {disk}%\n\n' \
-
 
 grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use this bot on our '
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
@@ -127,6 +123,9 @@ def info(update, context):
     sendMarkup(info_string, context.bot, update.message, reply_markup)
 
 def infocc(update, context):
+    infoss = f'CPU: {cpuUsage}%\n' \
+             f'RAM: {mem_p}%\n' \
+             f'DISK: {disk}%\n\n'
     query = update.callback_query
     message = query.message
     user_id = query.from_user.id
