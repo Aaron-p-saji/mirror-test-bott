@@ -5,7 +5,7 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from sys import executable
 from telegram import InlineKeyboardMarkup
-from telegram.ext import CommandHandler
+from telegram.ext import CommandHandler , CallbackQueryHandler
 
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, \
     INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
@@ -119,10 +119,20 @@ info_string = f'''
 
 def info(update, context):
     buttonu = ButtonMaker()
-    buttonu.buildbutton("Mirror Group", 'https://t.me/gDrive_linkz')
+    buttonu.sbutton("Mirror Group", 'aebx')
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(1))
     sendMarkup(info_string, context.bot, update.message, reply_markup)
 
+def infocc(update, context):
+    query = update.callback_query
+    message = query.message
+    user_id = query.from_user.id
+    data = query.data
+    data = data.split()
+    if user_id != int(data[1]):
+        query.answer(text="Not Yours!", show_alert=True)
+    else:
+        query.answer(text="Not Yours!12", show_alert=True)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
@@ -270,7 +280,8 @@ def main():
         osremove(".restartmsg")
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
-    info_handler = CommandHandler(BotCommands.InfoCommand, info, run_async=True)
+    info_handler = CommandHandler(BotCommands.InfoCommand, start, run_async=True)
+    infocc_handler = CallbackQueryHandler(infocc, pattern="aebx", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
@@ -285,6 +296,7 @@ def main():
                                  filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(info_handler)
+    dispatcher.add_handler(infocc_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
     dispatcher.add_handler(help_handler)
