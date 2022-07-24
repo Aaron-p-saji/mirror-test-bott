@@ -124,7 +124,8 @@ def info(update, context):
 
 def infocc(update, context):
     icpuUsage = cpu_percent(interval=0.5)
-    imem_p = memory.percent
+    imemory = virtual_memory()
+    imem_p = imemory.percent
     itotal, iused, ifree, idisk = disk_usage('/')
     
     infoss = f'CPU: {icpuUsage}%\n' \
