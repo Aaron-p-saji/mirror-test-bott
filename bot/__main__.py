@@ -64,9 +64,9 @@ def stats(update, context):
             f'<b>Memory Free:</b> {mem_a}\n' \
             f'<b>Memory Used:</b> {mem_u}\n'
     sendMessage(stats, context.bot, update.message)
-    infoss = f'<b>CPU:</b> {cpuUsage}%\n' \
-             f'<b>RAM:</b> {mem_p}%\n' \
-             f'<b>DISK:</b> {disk}%\n\n' \
+    infoss = f'CPU: {cpuUsage}%\n' \
+             f'RAM: {mem_p}%\n' \
+             f'DISK: {disk}%\n\n' \
 
 
 grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use this bot on our '
