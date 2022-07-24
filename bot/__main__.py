@@ -123,6 +123,10 @@ def info(update, context):
     sendMarkup(info_string, context.bot, update.message, reply_markup)
 
 def infocc(update, context):
+    cpuUsage = cpu_percent(interval=0.5)
+    mem_p = memory.percent
+    total, used, free, disk = disk_usage('/')
+    
     infoss = f'CPU: {cpuUsage}%\n' \
              f'RAM: {mem_p}%\n' \
              f'DISK: {disk}%\n\n'
