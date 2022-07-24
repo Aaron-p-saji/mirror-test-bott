@@ -64,6 +64,9 @@ def stats(update, context):
             f'<b>Memory Free:</b> {mem_a}\n' \
             f'<b>Memory Used:</b> {mem_u}\n'
     sendMessage(stats, context.bot, update.message)
+    infoss = f'<b>CPU:</b> {cpuUsage}%\n' \
+             f'<b>RAM:</b> {mem_p}%\n' \
+             f'<b>DISK:</b> {disk}%\n\n' \
 
 
 grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use this bot on our '
@@ -129,7 +132,7 @@ def infocc(update, context):
     user_id = query.from_user.id
     data = query.data
     data = data.split()
-    query.answer(text=f'<b>CPU:</b> {cpuUsage}%\n<b>RAM:</b> {mem_p}%\n<b>DISK:</b> {disk}%\n', show_alert=True)
+    query.answer(text=infoss, show_alert=True)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
