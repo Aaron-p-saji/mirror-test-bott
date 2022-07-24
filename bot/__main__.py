@@ -129,7 +129,7 @@ def infocc(update, context):
     user_id = query.from_user.id
     data = query.data
     data = data.split()
-    query.answer(text="Not Yours!", show_alert=True)
+    query.answer(text=f'<b>CPU:</b> {cpuUsage}%\n<b>RAM:</b> {mem_p}%\n<b>DISK:</b> {disk}%\n', show_alert=True)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
