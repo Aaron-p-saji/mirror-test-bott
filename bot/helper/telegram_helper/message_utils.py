@@ -42,7 +42,7 @@ def sendImgz(photo, caption : str, bot, message: Message, reply_markup: InlineKe
                               photo=photo,
                             reply_to_message_id=message.message_id,
                             caption=caption, reply_markup=reply_markup, allow_sending_without_reply=True,
-                            parse_mode='HTMl', disable_web_page_preview=True)
+                            parse_mode='HTMl')
     except RetryAfter as r:
         LOGGER.warning(str(r))
         sleep(r.retry_after * 1.5)
