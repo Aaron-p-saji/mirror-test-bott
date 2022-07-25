@@ -134,7 +134,7 @@ def aboutcy(update, context):
     data = data.split()
     query.answer(text='Closing')
     query.delete_message()
-    context.bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+    context.bot.delete_message(chat_id=message.chat.id, message_id=update.message.message_id)
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
