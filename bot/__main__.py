@@ -115,15 +115,7 @@ def ping(update, context):
 
 def info(update, context):
     user = update.message.from_user 
-    info_string = f' 𝙷𝚊𝚒 {user.username}/n'
-    info_string += f'✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {context.bot.name}/n'
-    info_string += f'✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/gDrive_linkz>𝚁𝚞𝚋𝚢 𝙼𝚊𝚝𝚑𝚎𝚠𝚜</a>/n'
-    info_string += f'𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚃𝙷𝙾𝙽-𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼-𝙱𝙾𝚃'
-    info_string += f'✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹/n'
-    info_string += f'✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱/n'
-    info_string += f'✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄/n'
-
-    
+    info_string = f' 𝙷𝚊𝚒 {user.username}/n ✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {context.bot.name}/n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/gDrive_linkz>𝚁𝚞𝚋𝚢 𝙼𝚊𝚝𝚑𝚎𝚠𝚜</a>/n✯𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚃𝙷𝙾𝙽-𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼-𝙱𝙾𝚃/n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹/n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱/n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄'
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
     buttonu = ButtonMaker()
     buttonu.sbutton("Mirror Group", 'aebx')
