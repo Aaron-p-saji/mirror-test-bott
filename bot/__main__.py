@@ -117,7 +117,7 @@ def info(update, context):
     user = update.message.from_user
     me = context.bot.get_me()
     info_string = f'''
-    𝙷𝚒 @{user.username}
+    𝙷𝚒 @{user.name}
  
 ✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {me.username}
 ✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/gDrive_linkz>𝚁𝚞𝚋𝚢 𝙼𝚊𝚝𝚑𝚎𝚠𝚜</a>
