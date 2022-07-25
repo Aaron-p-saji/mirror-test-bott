@@ -114,24 +114,15 @@ def ping(update, context):
     editMessage(f'{end_time - start_time} ms', reply)
 
 def info(update, context):
-    user = update.message.from_user
-    me_name = context.bot.name
-    info_string = f'''
-✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {}
-✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/gDrive_linkz>𝚁𝚞𝚋𝚢 𝙼𝚊𝚝𝚑𝚎𝚠𝚜</a>
-✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚃𝙷𝙾𝙽-𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼-𝙱𝙾𝚃
-✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
-✯ 𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
-✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄
-✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: v2.0
-    
-'''
+    user = update.message.from_user 
+    info_string = f'✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {context.bot.name}'
+
     
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
     buttonu = ButtonMaker()
     buttonu.sbutton("Mirror Group", 'aebx')
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(1))
-    sendImgz(img, info_string.format(me_name), context.bot, update.message, reply_markup)
+    sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
 def infocc(update, context):
     icpuUsage = cpu_percent(interval=0.5)
