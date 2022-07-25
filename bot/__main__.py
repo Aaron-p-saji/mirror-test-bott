@@ -5,11 +5,9 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from sys import executable
 from telegram import InlineKeyboardMarkup
-from telegram.message import Message
-from telegram.ext import CommandHandler , CallbackQueryHandler
+from telegram.ext import CommandHandler, CallbackQueryHandler
 
-from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, \
-    INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
+from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
 from .helper.ext_utils.telegraph_helper import telegraph
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
@@ -19,19 +17,16 @@ from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, sendI
 from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
 
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, delete, count, \
-    leech_settings, search, rss
-
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, delete, count, leech_settings, search, rss
 
 def stats(update, context):
     if ospath.exists('.git'):
-        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'"],
-                                   shell=True).decode()
+        last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'"], shell=True).decode()
     else:
         last_commit = 'No UPSTREAM_REPO'
     currentTime = get_readable_time(time() - botStartTime)
     osUptime = get_readable_time(time() - boot_time())
-    total, used, free, disk = disk_usage('/')
+    total, used, free, disk= disk_usage('/')
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
@@ -48,28 +43,27 @@ def stats(update, context):
     mem_t = get_readable_file_size(memory.total)
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
-    stats = f'<b>Commit Date:</b> {last_commit}\n\n' \
-            f'<b>Bot Uptime:</b> {currentTime}\n' \
-            f'<b>OS Uptime:</b> {osUptime}\n\n' \
-            f'<b>Total Disk Space:</b> {total}\n' \
-            f'<b>Used:</b> {used} | <b>Free:</b> {free}\n\n' \
-            f'<b>Upload:</b> {sent}\n' \
-            f'<b>Download:</b> {recv}\n\n' \
-            f'<b>CPU:</b> {cpuUsage}%\n' \
-            f'<b>RAM:</b> {mem_p}%\n' \
-            f'<b>DISK:</b> {disk}%\n\n' \
-            f'<b>Physical Cores:</b> {p_core}\n' \
-            f'<b>Total Cores:</b> {t_core}\n\n' \
-            f'<b>SWAP:</b> {swap_t} | <b>Used:</b> {swap_p}%\n' \
-            f'<b>Memory Total:</b> {mem_t}\n' \
-            f'<b>Memory Free:</b> {mem_a}\n' \
+    stats = f'<b>Commit Date:</b> {last_commit}\n\n'\
+            f'<b>Bot Uptime:</b> {currentTime}\n'\
+            f'<b>OS Uptime:</b> {osUptime}\n\n'\
+            f'<b>Total Disk Space:</b> {total}\n'\
+            f'<b>Used:</b> {used} | <b>Free:</b> {free}\n\n'\
+            f'<b>Upload:</b> {sent}\n'\
+            f'<b>Download:</b> {recv}\n\n'\
+            f'<b>CPU:</b> {cpuUsage}%\n'\
+            f'<b>RAM:</b> {mem_p}%\n'\
+            f'<b>DISK:</b> {disk}%\n\n'\
+            f'<b>Physical Cores:</b> {p_core}\n'\
+            f'<b>Total Cores:</b> {t_core}\n\n'\
+            f'<b>SWAP:</b> {swap_t} | <b>Used:</b> {swap_p}%\n'\
+            f'<b>Memory Total:</b> {mem_t}\n'\
+            f'<b>Memory Free:</b> {mem_a}\n'\
             f'<b>Memory Used:</b> {mem_u}\n'
     sendMessage(stats, context.bot, update.message)
 
 grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use this bot on our '
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
-
-
+    
 def start(update, context):
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
@@ -84,7 +78,6 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
     else:
         sendMarkup(grpbot, context.bot, update.message, reply_markup)
 
-
 def restart(update, context):
     restart_message = sendMessage("⚙️ Restarting...", context.bot, update.message)
     if Interval:
@@ -93,7 +86,7 @@ def restart(update, context):
     clean_all()
     srun(["pkill", "-9", "-f", "gunicorn|extra-api|last-api|megasdkrest|new-api"])
     srun(["python3", "update.py"])
-    with open(".restartmsg", "w") as f:
+    with open(".restartmsg", "w") as f: 
         f.truncate(0)
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
     osexecl(executable, executable, "-m", "bot")
@@ -112,31 +105,36 @@ def ping(update, context):
     editMessage("🟢🟢🟢", reply)
     editMessage("🟢🟢🟢", reply)
     editMessage(f'{end_time - start_time} ms', reply)
-
+    
 def aboutme(update, context):
     user = update.message.from_user 
-    info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯**𝙼𝚈 𝙽𝙰𝙼𝙴**: *{context.bot.first_name}*\n✯ **𝙲𝚁𝙴𝙰𝚃𝙾𝚁**: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ **𝙻𝙸𝙱𝚁𝙰𝚁𝚈**: *PYTHON\-TELEGRAM\-BOT*\n✯ **𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴**: *PYTHON 𝟹*\n✯ **𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴**: *MONGO DB*\n✯ **𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁**: *HEROKU*'
+    info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: *{context.bot.first_name}*\n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: *PYTHON\-TELEGRAM\-BOT*\n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: *PYTHON 𝟹*\n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: *MONGO DB*\n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: *HEROKU*'
     img = 'https://telegra.ph/file/a9533faa4c8ae2322b6cf.jpg'
     buttonu = ButtonMaker()
-    buttonu.sbutton("Mirror Group", 'aebx')
-    reply_markup = InlineKeyboardMarkup(buttonu.build_menu(1))
+    buttonu.sbutton("🎫 Owners Note 🎫", 'aebx')
+    buttonu.sbutton("CLOSE", 'aeby')
+    reply_markup = InlineKeyboardMarkup(buttonu.build_menu(2))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
 def aboutcc(update, context):
-    icpuUsage = cpu_percent(interval=0.5)
-    imemory = virtual_memory()
-    imem_p = imemory.percent
-    itotal, iused, ifree, idisk = disk_usage('/')
-    
-    infoss = f'CPU: {icpuUsage}%\n' \
-             f'RAM: {imem_p}%\n' \
-             f'DISK: {idisk}%\n\n'
+    infos = 'Processing....'
+    infoss = f'Hai \nI am Ruby the owner of this bot.\nI\'ve used an open source project to create this bot\nIf you have any issues with this bot please contact me'
     query = update.callback_query
     message = query.message
     user_id = query.from_user.id
     data = query.data
     data = data.split()
     query.answer(text=infoss, show_alert=True)
+    
+def aboutcy(update, context):
+    query = update.callback_query
+    message = query.message
+    user_id = query.from_user.id
+    data = query.data
+    data = data.split()
+    query.answer(text='Closing')
+    query.delete_message()
+    context.bot.delete_message()
 
 def log(update, context):
     sendLogFile(context.bot, update.message)
@@ -211,35 +209,26 @@ help_string_telegraph = f'''<br>
 '''
 
 help = telegraph.create_page(
-    title='Lionel Messi Bot Help',
-    content=help_string_telegraph,
-)["path"]
+        title='Lionel Messi Bot Help',
+        content=help_string_telegraph,
+    )["path"]
 
 help_string = f'''
 /{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
-
 /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
-
 /{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
-
 /{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
-
 /{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
-
 /{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
-
 /{BotCommands.RestartCommand}: Restart and update the bot
-
 /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 '''
-
 
 def bot_help(update, context):
     button = ButtonMaker()
     button.buildbutton("All Commands", f"https://telegra.ph/{help}")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     sendMarkup(help_string, context.bot, update.message, reply_markup)
-
 
 def main():
     start_cleanup()
@@ -254,23 +243,22 @@ def main():
                 else:
                     msg = '🤖 Bot Restarted! 🤖'
                 for tag, links in data.items():
-                    msg += f"\n\n{tag}: "
-                    for index, link in enumerate(links, start=1):
-                        msg += f" <a href='{link}'>{index}</a> |"
-                        if len(msg.encode()) > 4000:
-                            if '😊 Restarted successfully! 😊' in msg and cid == chat_id:
-                                bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTMl',
-                                                    disable_web_page_preview=True)
-                                osremove(".restartmsg")
-                            else:
-                                try:
-                                    bot.sendMessage(cid, msg, 'HTML')
-                                except Exception as e:
-                                    LOGGER.error(e)
-                            msg = ''
+                     msg += f"\n\n{tag}: "
+                     for index, link in enumerate(links, start=1):
+                         msg += f" <a href='{link}'>{index}</a> |"
+                         if len(msg.encode()) > 4000:
+                             if '😊 Restarted successfully! 😊' in msg and cid == chat_id:
+                                 bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTMl', disable_web_page_preview=True)
+                                 osremove(".restartmsg")
+                             else:
+                                 try:
+                                     bot.sendMessage(cid, msg, 'HTML')
+                                 except Exception as e:
+                                     LOGGER.error(e)
+                             msg = ''
                 if ' 🤖 Restarted successfully! 😊' in msg and cid == chat_id:
-                    bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTMl', disable_web_page_preview=True)
-                    osremove(".restartmsg")
+                     bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTMl', disable_web_page_preview=True)
+                     osremove(".restartmsg")
                 else:
                     try:
                         bot.sendMessage(cid, msg, 'HTML')
@@ -286,21 +274,20 @@ def main():
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
+    aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
                                      filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     help_handler = CommandHandler(BotCommands.HelpCommand,
-                                  bot_help, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user,
-                                  run_async=True)
+                                  bot_help, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     stats_handler = CommandHandler(BotCommands.StatsCommand,
-                                   stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user,
-                                   run_async=True)
-    log_handler = CommandHandler(BotCommands.LogCommand, log,
-                                 filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
+                                   stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
+    log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
+    dispatcher.add_handler(aboutcy_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
     dispatcher.add_handler(help_handler)
@@ -309,7 +296,6 @@ def main():
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
     LOGGER.info("Bot Started!")
     signal(SIGINT, exit_clean_up)
-
 
 app.start()
 main()
