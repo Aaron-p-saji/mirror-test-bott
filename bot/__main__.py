@@ -120,6 +120,7 @@ info_string = f'''
 '''
 
 def info(update, context):
+    user = update.message.from_user
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
     buttonu = ButtonMaker()
     buttonu.sbutton("Mirror Group", 'aebx')
