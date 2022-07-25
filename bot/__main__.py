@@ -116,7 +116,7 @@ def ping(update, context):
 def info(update, context):
     user = update.message.from_user
     info_string = f'''
-    ℌ𝔦 {user.id}
+    ℌ𝔦 {user.username}
 '''
     
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
