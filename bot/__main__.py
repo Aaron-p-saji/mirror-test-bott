@@ -112,7 +112,7 @@ def aboutme(update, context):
     img = 'https://telegra.ph/file/a9533faa4c8ae2322b6cf.jpg'
     buttonu = ButtonMaker()
     buttonu.sbutton("🎫 Owners Note 🎫", 'aebx')
-    buttonu.sbutton("CLOSE", 'aeby')
+    buttonu.sbutton("🔒 CLOSE 🔒", 'aeby')
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(2))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
@@ -133,11 +133,6 @@ def aboutcy(update, context):
     data = query.data
     data = data.split()
     query.answer(text='Closing')
-    query.edit_message_text(text='Closing.')
-    query.edit_message_text(text='Closing..')
-    query.edit_message_text(text='Closing...')
-    query.edit_message_text(text='Closing....')
-    query.edit_message_text(text='Closing.....')
     query.delete_message()
 
 def log(update, context):
