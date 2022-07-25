@@ -113,7 +113,7 @@ def ping(update, context):
     editMessage(f'{end_time - start_time} ms', reply)
 
 info_string = f'''
-    𝕋𝕙𝕚𝕤 𝕚𝕤 𝕒 𝕄𝕚𝕣𝕣𝕠𝕣 𝔹𝕠𝕥
+    ℌ𝔦 {message.from_user.id}
 '''
 
 def info(update, context):
