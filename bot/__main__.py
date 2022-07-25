@@ -284,7 +284,7 @@ def main():
         osremove(".restartmsg")
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
-    info_handler = CommandHandler(BotCommands.InfoCommand, aboutme, run_async=True)
+    info_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     infocc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
