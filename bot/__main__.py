@@ -113,7 +113,7 @@ def ping(update, context):
     editMessage("🟢🟢🟢", reply)
     editMessage(f'{end_time - start_time} ms', reply)
 
-def info(update, context):
+def aboutme(update, context):
     user = update.message.from_user 
     info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯**𝙼𝚈 𝙽𝙰𝙼𝙴**: *{context.bot.first_name}*\n✯ **𝙲𝚁𝙴𝙰𝚃𝙾𝚁**: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ **𝙻𝙸𝙱𝚁𝙰𝚁𝚈**: *PYTHON\-TELEGRAM\-BOT*\n✯ **𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴**: *PYTHON 𝟹*\n✯ **𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴**: *MONGO DB*\n✯ **𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁**: *HEROKU*'
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
@@ -122,7 +122,7 @@ def info(update, context):
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(1))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
-def infocc(update, context):
+def aboutcc(update, context):
     icpuUsage = cpu_percent(interval=0.5)
     imemory = virtual_memory()
     imem_p = imemory.percent
@@ -284,8 +284,8 @@ def main():
         osremove(".restartmsg")
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
-    info_handler = CommandHandler(BotCommands.InfoCommand, info, run_async=True)
-    infocc_handler = CallbackQueryHandler(infocc, pattern="aebx", run_async=True)
+    info_handler = CommandHandler(BotCommands.InfoCommand, aboutme, run_async=True)
+    infocc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     restart_handler = CommandHandler(BotCommands.RestartCommand, restart,
