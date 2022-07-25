@@ -112,13 +112,13 @@ def ping(update, context):
     editMessage("🟢🟢🟢", reply)
     editMessage("🟢🟢🟢", reply)
     editMessage(f'{end_time - start_time} ms', reply)
- 
-info_string = f'''
-    ℌ𝔦 {user.id}
-'''
 
 def info(update, context):
     user = update.message.from_user
+    info_string = f'''
+    ℌ𝔦 {user.id}
+'''
+    
     img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
     buttonu = ButtonMaker()
     buttonu.sbutton("Mirror Group", 'aebx')
