@@ -117,10 +117,11 @@ info_string = f'''
 '''
 
 def info(update, context):
+    img = 'https://telegra.ru.com/p/e74261e8x916320db94d2b30b241cddf245e669a64b26be2'
     buttonu = ButtonMaker()
     buttonu.sbutton("Mirror Group", 'aebx')
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(1))
-    sendMarkup(info_string, context.bot, update.message, reply_markup)
+    sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
 def infocc(update, context):
     icpuUsage = cpu_percent(interval=0.5)
