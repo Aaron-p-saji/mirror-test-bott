@@ -114,7 +114,7 @@ def ping(update, context):
     editMessage(f'{end_time - start_time} ms', reply)
 
 info_string = f'''
-    ℌ𝔦 {Message.from_user.id}
+    ℌ𝔦 {Message.user.id}
 '''
 
 def info(update, context):
