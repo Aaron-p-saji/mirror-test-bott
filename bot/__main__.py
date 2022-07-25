@@ -115,11 +115,10 @@ def ping(update, context):
 
 def info(update, context):
     user = update.message.from_user
-    me = context.bot.get_me()
     info_string = f'''
     𝙷𝚒 @{user.name}
  
-✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {me.username}
+✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: {context.bot.name}
 ✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/gDrive_linkz>𝚁𝚞𝚋𝚢 𝙼𝚊𝚝𝚑𝚎𝚠𝚜</a>
 ✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚃𝙷𝙾𝙽-𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼-𝙱𝙾𝚃
 ✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
