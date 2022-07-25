@@ -27,7 +27,7 @@ def sendMarkup(text: str, bot, message: Message, reply_markup: InlineKeyboardMar
         return bot.sendMessage(message.chat_id,
                             reply_to_message_id=message.message_id,
                             text=text, reply_markup=reply_markup, allow_sending_without_reply=True,
-                            parse_mode='Markdown', disable_web_page_preview=True)
+                            parse_mode='HTML', disable_web_page_preview=True)
     except RetryAfter as r:
         LOGGER.warning(str(r))
         sleep(r.retry_after * 1.5)
@@ -42,7 +42,7 @@ def sendImgz(photo, caption : str, bot, message: Message, reply_markup: InlineKe
                               photo=photo,
                             reply_to_message_id=message.message_id,
                             caption=caption, reply_markup=reply_markup, allow_sending_without_reply=True,
-                            parse_mode='HTMl', filename='mirror_Vala-image')
+                            parse_mode='MarkdownV2', filename='mirror_Vala-image')
     except RetryAfter as r:
         LOGGER.warning(str(r))
         sleep(r.retry_after * 1.5)
