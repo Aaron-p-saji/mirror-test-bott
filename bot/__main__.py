@@ -115,7 +115,7 @@ def ping(update, context):
 
 def info(update, context):
     user = update.message.from_user
-    me = context.bot.from_user
+    me = context.bot.get_me
     info_string = f'''
     𝙷𝚒 @{user.name}
  
