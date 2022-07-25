@@ -271,25 +271,25 @@ def _auto_cancel(msg, msg_id):
     except:
         pass
 
-def watch(update, context):
+def undyt(update, context):
     _watch(context.bot, update.message)
 
-def watchZip(update, context):
+def undyta(update, context):
     _watch(context.bot, update.message, True)
 
-def leechWatch(update, context):
+def undytaq(update, context):
     _watch(context.bot, update.message, isLeech=True)
 
-def leechWatchZip(update, context):
+def undytaqm(update, context):
     _watch(context.bot, update.message, True, True)
 
-watch_handler = CommandHandler(BotCommands.WatchCommand, watch,
+watch_handler = CommandHandler(BotCommands.WatchCommand, undyt,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
-zip_watch_handler = CommandHandler(BotCommands.ZipWatchCommand, watchZip,
+zip_watch_handler = CommandHandler(BotCommands.ZipWatchCommand, undyta,
                                     filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
-leech_watch_handler = CommandHandler(BotCommands.LeechWatchCommand, leechWatch,
+leech_watch_handler = CommandHandler(BotCommands.LeechWatchCommand, undytaq,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
-leech_zip_watch_handler = CommandHandler(BotCommands.LeechZipWatchCommand, leechWatchZip,
+leech_zip_watch_handler = CommandHandler(BotCommands.LeechZipWatchCommand, undytaqm,
                                     filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 quality_handler = CallbackQueryHandler(select_format, pattern="qu", run_async=True)
 
