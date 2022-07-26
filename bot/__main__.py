@@ -280,7 +280,7 @@ def main():
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
-    aboutcx_handler = CommandHandler(BotCommands.AboutMeCommand, start, filters.regex('aboutme'))
+    aboutcx_handler = CommandHandler(BotCommands.AboutMeCommand, start, Filters.regex('aboutme'))
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
@@ -294,6 +294,7 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
+    dispatcher.add_handler(aboutcx_handler)
     dispatcher.add_handler(aboutcy_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
