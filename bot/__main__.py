@@ -282,6 +282,7 @@ def main():
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
     application.add_handler(CommandHandler("start", start, filters.regex(aboutme))
 )
+    application.add_handler(CommandHandler("start", start))
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
