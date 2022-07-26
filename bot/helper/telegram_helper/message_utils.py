@@ -22,7 +22,7 @@ def sendMessage(text: str, bot, message: Message):
         LOGGER.error(str(e))
         return
       
-def sendCmes(channelid: int,text: str, bot, message: Message):
+def sendCmes(channelid: int,text, bot, message: Message):
     try:
         return bot.sendMessage(chat_id=channelid,text=text, parse_mode='HTMl', disable_web_page_preview=True)
     except RetryAfter as r:
