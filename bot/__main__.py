@@ -4,7 +4,7 @@ from subprocess import run as srun, check_output
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from time import time
 from sys import executable
-from telegram import InlineKeyboardMarkup
+from telegram import InlineKeyboardMarkup, helpers
 from telegram.ext import CommandHandler, CallbackQueryHandler
 
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
@@ -65,11 +65,13 @@ grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use thi
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context):
+    url = helpers.create_deep_linked_url(context.bot.username, info)
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
     buttons.buildbutton("🎯 Mirror Group 🎯", "https://t.me/gDrive_linkz")
+    buttons.buildbutton("🎯 Mirror Group 🎯", url)
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
