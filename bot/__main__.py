@@ -5,7 +5,7 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from sys import executable
 from telegram import InlineKeyboardMarkup
-from telegram.ext import CommandHandler, CallbackQueryHandler, filters
+from telegram.ext import CommandHandler, CallbackQueryHandler, filters, ContextTypes
 from telegram.utils import helpers
 
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
