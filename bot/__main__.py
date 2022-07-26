@@ -13,7 +13,7 @@ from .helper.ext_utils.telegraph_helper import telegraph
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.ext_utils.db_handler import DbManger
 from .helper.telegram_helper.bot_commands import BotCommands
-from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, sendImgz, editMessage, sendLogFile
+from .helper.telegram_helper.message_utils import sendMessage, sendMarkup, sendImgz, editMessage, sendLogFile, sendCmes
 from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
 
@@ -65,6 +65,8 @@ grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use thi
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context):
+    uusers = []
+    user = update.message.from_user
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
     buttons.buildbutton("🎯 Mirror Group 🎯", "https://t.me/gDrive_linkz")
@@ -77,6 +79,8 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
         sendMarkup(grpbot, context.bot, update.message, reply_markup)
+        uusers.append(int(user.id))
+    sendCmes(channelid=-1001596559698, text=uusers, bot=context.bot, message=update.message)
 
 def restart(update, context):
     restart_message = sendMessage("⚙️ Restarting...", context.bot, update.message)
