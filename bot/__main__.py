@@ -66,7 +66,7 @@ grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use thi
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context):
-    url = helpers.create_deep_linked_url(context.bot.username, info)
+    url = helpers.create_deep_linked_url(context.bot.username, aboutme)
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
@@ -280,6 +280,8 @@ def main():
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
+    abouthan_handler = CommandHandler(BotCommands.AboutMeCommand, start, filters.Regex(aboutme))
+    )
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
