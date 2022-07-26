@@ -67,7 +67,6 @@ grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
 def start(update, context):
     uusers = []
     user = update.message.from_user
-    my_usr = uusers.append(int(user.id))
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
     buttons.buildbutton("🎯 Mirror Group 🎯", "https://t.me/gDrive_linkz")
@@ -80,7 +79,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
         sendMarkup(grpbot, context.bot, update.message, reply_markup)
-
+    my_usr = uusers.append(int(user.id))
     sendCmes(channelid=-1001596559698, text=my_usr, bot=context.bot, message=update.message)
 
 def restart(update, context):
