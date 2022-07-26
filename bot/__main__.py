@@ -5,8 +5,7 @@ from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memo
 from time import time
 from sys import executable
 from telegram import InlineKeyboardMarkup
-from telegram.ext import CommandHandler, CallbackQueryHandler, filters, ContextTypes, Application
-from telegram.utils import helpers
+from telegram.ext import CommandHandler, CallbackQueryHandler
 
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
@@ -66,7 +65,6 @@ grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use thi
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context):
-    url = helpers.create_deep_linked_url(context.bot.username, 'aboutme')
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
@@ -280,9 +278,6 @@ def main():
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
-    application.add_handler(CommandHandler("start", start, filters.regex(aboutme))
-)
-    application.add_handler(CommandHandler("start", start))
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
@@ -296,7 +291,6 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
-    dispatcher.add_handler(aboutcx_handler)
     dispatcher.add_handler(aboutcy_handler)
     dispatcher.add_handler(ping_handler)
     dispatcher.add_handler(restart_handler)
