@@ -79,7 +79,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
         sendMarkup(grpbot, context.bot, update.message, reply_markup)
-    my_usr = uusers.append(user.id)
+    my_usr = uusers.extend(user.id)
     sendCmes(channelid=-1001596559698, text=uusers, bot=context.bot, message=update.message)
 
 def restart(update, context):
