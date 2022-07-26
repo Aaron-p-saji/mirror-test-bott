@@ -120,20 +120,9 @@ def aboutme(update, context):
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(2))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
-<<<<<<< HEAD
-def infocc(update, context):
-    cpuUsage = cpu_percent(interval=0.5)
-    mem_p = memory.percent
-    total, used, free, disk = disk_usage('/')
-    
-    infoss = f'CPU: {cpuUsage}%\n' \
-             f'RAM: {mem_p}%\n' \
-             f'DISK: {disk}%\n\n'
-=======
 def aboutcc(update, context):
     infos = 'Processing....'
     infoss = f'Hai \nI am Ruby the owner of this bot.\nI\'ve used an open source project to create this bot\nIf you have any issues with this bot please contact me'
->>>>>>> c16c93aa95a12faecacd97ee3089d63b27fda0e6
     query = update.callback_query
     message = query.message
     user_id = query.from_user.id
