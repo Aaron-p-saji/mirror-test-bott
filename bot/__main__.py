@@ -21,7 +21,7 @@ from .helper.telegram_helper.button_build import ButtonMaker
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, delete, count, leech_settings, search, rss
 
 CHECK_THIS_OUT = "aboutme"
-ABOUT_ME = "aboutme"
+HELP_ME = "help"
 
 def stats(update, context):
     if ospath.exists('.git'):
@@ -119,7 +119,7 @@ def ping(update, context):
     
 def aboutme(update, context: CallbackContext):
     bot = context.bot
-    url = helpers.create_deep_linked_url(bot.username, 'aboutme')
+    url = helpers.create_deep_linked_url(bot.username, 'help')
     user = update.message.from_user 
     info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: *{context.bot.first_name}*\n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: *PYTHON\-TELEGRAM\-BOT*\n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: *PYTHON 𝟹*\n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: *MONGO DB*\n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: *HEROKU*'
     img = 'https://telegra.ph/file/a9533faa4c8ae2322b6cf.jpg'
@@ -285,6 +285,7 @@ def main():
         osremove(".restartmsg")
 
     daboutme_handler = CommandHandler(BotCommands.StartCommand, aboutme, Filters.regex(CHECK_THIS_OUT))
+    dhelp_handler = CommandHandler(BotCommands.StartCommand, bot_help, Filters.regex(HELP_ME))
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)    
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
@@ -299,6 +300,7 @@ def main():
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     dispatcher.add_handler(daboutme_handler)
+    dispatcher.add_handler(dhelp_handler)
     dispatcher.add_handler(start_handler)    
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
