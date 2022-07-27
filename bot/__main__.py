@@ -284,7 +284,7 @@ def main():
         bot.edit_message_text("🤖 Restarted successfully! 😊", chat_id, msg_id)
         osremove(".restartmsg")
 
-    daboutme_handler = CommandHandler(BotCommands.HelpCommand, aboutme, Filters.regex(CHECK_THIS_OUT))
+    daboutme_handler = CommandHandler(BotCommands.StartCommand, aboutme, Filters.regex(CHECK_THIS_OUT))
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)    
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
