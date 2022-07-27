@@ -4,8 +4,8 @@ from subprocess import run as srun, check_output
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters, boot_time
 from time import time
 from sys import executable
-from telegram import InlineKeyboardMarkup
-from telegram.ext import CommandHandler, CallbackQueryHandler
+from telegram import InlineKeyboardMarkup, Update , Update
+from telegram.ext import CommandHandler, CallbackQueryHandler, Update, Filters, CallbackContext
 
 from bot import bot, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, LOGGER, Interval, INCOMPLETE_TASK_NOTIFIER, DB_URI, alive, app, main_loop
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
@@ -18,6 +18,9 @@ from .helper.telegram_helper.filters import CustomFilters
 from .helper.telegram_helper.button_build import ButtonMaker
 
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, delete, count, leech_settings, search, rss
+
+CHECK_THIS_OUT = "help"
+ABOUT_ME = "aboutme"
 
 def stats(update, context):
     if ospath.exists('.git'):
@@ -64,7 +67,9 @@ def stats(update, context):
 grpbot = '🤨 Hey!! Wassap! Using This Bot On PM is Not Allowed, Please use this bot on our '
 grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
-def start(update, context):
+def start(update, context : CallbackContext):
+    bot = context.bot
+    url = helpers.create_deep_linked_url(bot.username, help, group=True)
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
@@ -111,13 +116,16 @@ def ping(update, context):
     editMessage("🟢🟢🟢", reply)
     editMessage(f'{end_time - start_time} ms', reply)
     
-def aboutme(update, context):
+def aboutme(update, context: CallbackContext):
+    bot = context.bot
+    url = helpers.create_deep_linked_url(bot.username, 'aboutme')
     user = update.message.from_user 
     info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: *{context.bot.first_name}*\n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: *PYTHON\-TELEGRAM\-BOT*\n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: *PYTHON 𝟹*\n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: *MONGO DB*\n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: *HEROKU*'
     img = 'https://telegra.ph/file/a9533faa4c8ae2322b6cf.jpg'
     buttonu = ButtonMaker()
     buttonu.sbutton("🎫 Owners Note 🎫", 'aebx')
     buttonu.sbutton("🔒 CLOSE 🔒", 'aeby')
+    buttonu.buildbutton("Help", url)
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(2))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
@@ -276,6 +284,7 @@ def main():
         osremove(".restartmsg")
 
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
+    daboutme_handler = CommandHandler("start", aboutme, Filters.regex(CHECK_THIS_OUT))
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
@@ -289,6 +298,7 @@ def main():
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
     dispatcher.add_handler(start_handler)
+    dispatcher.add_handler()
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
     dispatcher.add_handler(aboutcy_handler)
