@@ -76,7 +76,7 @@ def start(update, context : CallbackContext):
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
     buttons.buildbutton("🎯 Mirror Group 🎯", "https://t.me/gDrive_linkz")
-    buttons.buildbutton("🎯 Mirror Group 🎯", url)
+    buttons.buildbutton("🤴 About Me 🤴", url)
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
