@@ -284,8 +284,8 @@ def main():
         bot.edit_message_text("🤖 Restarted successfully! 😊", chat_id, msg_id)
         osremove(".restartmsg")
 
-    start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     daboutme_handler = CommandHandler("start", aboutme, Filters.regex(CHECK_THIS_OUT))
+    start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)    
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
     aboutcy_handler = CallbackQueryHandler(aboutcy, pattern="aeby", run_async=True)
@@ -298,8 +298,8 @@ def main():
     stats_handler = CommandHandler(BotCommands.StatsCommand,
                                    stats, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
     log_handler = CommandHandler(BotCommands.LogCommand, log, filters=CustomFilters.owner_filter | CustomFilters.sudo_user, run_async=True)
-    dispatcher.add_handler(start_handler)
     dispatcher.add_handler(daboutme_handler)
+    dispatcher.add_handler(start_handler)    
     dispatcher.add_handler(aboutme_handler)
     dispatcher.add_handler(aboutcc_handler)
     dispatcher.add_handler(aboutcy_handler)
