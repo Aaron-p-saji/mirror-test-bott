@@ -70,7 +70,7 @@ grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context : CallbackContext):
     bot = context.bot
-    url = helpers.create_deep_linked_url(bot.username, help, group=True)
+    url = helpers.create_deep_linked_url(bot.username, help)
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
