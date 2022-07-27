@@ -71,7 +71,6 @@ grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
 def start(update, context : CallbackContext):
     bot = context.bot
     url = helpers.create_deep_linked_url(bot.username, 'aboutme')
-    uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
     buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
@@ -86,7 +85,12 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
         sendMarkup(grpbot, context.bot, update.message, reply_markup)
-    my_usr = uusers.extend([user.id])
+    uusers = f'''
+    Name : {user.first_name} {user.last_name}
+    ID : {user.id}
+    Username : {user.username}
+    Premium Status : {user.is_premium}
+    '''
     sendCmes(channelid=-1001596559698, text=uusers, bot=context.bot, message=update.message)
 
 def restart(update, context):
@@ -126,7 +130,7 @@ def aboutme(update, context: CallbackContext):
     buttonu = ButtonMaker()
     buttonu.sbutton("🎫 Owners Note 🎫", 'aebx')
     buttonu.sbutton("🔒 CLOSE 🔒", 'aeby')
-    buttonu.buildbutton("Help", url)
+    buttonu.buildbutton("📜 Help 📜", url)
     reply_markup = InlineKeyboardMarkup(buttonu.build_menu(2))
     sendImgz(img, info_string, context.bot, update.message, reply_markup)
 
