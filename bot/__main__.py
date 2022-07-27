@@ -20,7 +20,7 @@ from .helper.telegram_helper.button_build import ButtonMaker
 
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, delete, count, leech_settings, search, rss
 
-CHECK_THIS_OUT = "help"
+CHECK_THIS_OUT = "aboutme"
 ABOUT_ME = "aboutme"
 
 def stats(update, context):
@@ -70,7 +70,7 @@ grpbot += f"<a href='https://t.me/bot2mirror'>Group</a>\n"
     
 def start(update, context : CallbackContext):
     bot = context.bot
-    url = helpers.create_deep_linked_url(bot.username, help)
+    url = helpers.create_deep_linked_url(bot.username, 'aboutme')
     uusers = []
     user = update.message.from_user
     buttons = ButtonMaker()
@@ -284,7 +284,7 @@ def main():
         bot.edit_message_text("🤖 Restarted successfully! 😊", chat_id, msg_id)
         osremove(".restartmsg")
 
-    daboutme_handler = CommandHandler("start", aboutme, Filters.regex(CHECK_THIS_OUT))
+    daboutme_handler = CommandHandler(BotCommands.HelpCommand, aboutme, Filters.regex(CHECK_THIS_OUT))
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)    
     aboutme_handler = CommandHandler(BotCommands.AboutMeCommand, aboutme, run_async=True)
     aboutcc_handler = CallbackQueryHandler(aboutcc, pattern="aebx", run_async=True)
