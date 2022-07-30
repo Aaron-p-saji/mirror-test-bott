@@ -125,7 +125,7 @@ def aboutme(update, context: CallbackContext):
     bot = context.bot
     url = helpers.create_deep_linked_url(bot.username, 'help')
     user = update.message.from_user 
-    info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: *{context.bot.first_name}*\n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: *PYTHON\-TELEGRAM\-BOT*\n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: *PYTHON 𝟹*\n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: *MONGO DB*\n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: *HEROKU*'
+    info_string = f' 𝙷𝚊𝚒 {user.first_name}\n✯ 𝙼𝚈 𝙽𝙰𝙼𝙴: *{context.bot.first_name}*\n✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: *[Ruby Mathews](https://t.me/gDrive_linkz)*\n✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: *PYTHON\-TELEGRAM\-BOT*\n✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: *PYTHON 𝟹*\n✯ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴: *MONGO DB*\n✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: *HEROKU*\n✯ 𝙱𝙾𝚃 𝚅𝙴𝚁𝚂𝙸𝙾𝙽: *V-3.1*'
     img = 'https://telegra.ph/file/a9533faa4c8ae2322b6cf.jpg'
     buttonu = ButtonMaker()
     buttonu.sbutton("🎫 Owners Note 🎫", 'aebx')
