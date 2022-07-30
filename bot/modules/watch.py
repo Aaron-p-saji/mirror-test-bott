@@ -178,7 +178,7 @@ def _watch(context, update, isZip=False, isLeech=False, multi=0):
     buttonu.sbutton("🔒 CLOSE 🔒", 'aeby')
     bttnsa = InlineKeyboardMarkup(buttonu.build_menu(2))
 
-    sendMarkup(text=testmgs, bot=context.bot, message=update.message, reply_markup=bttnsa)
+    sendMarkup(text=testmgs, bot=context, message=update, reply_markup=bttnsa)
 
 def _qual_subbuttons(task_id, qual, msg):
     buttons = button_build.ButtonMaker()
