@@ -156,8 +156,9 @@ def aboutcy(update, context):
 def log(update, context):
     sendLogFile(context.bot, update.message)
 
-
 help_string_telegraph = f'''<br>
+<b>NOTE</b>: Due To Errors in bot We Have Completly Removed Yt-Dl Commands
+<br><br>
 <b>/{BotCommands.HelpCommand}</b>: To get this message
 <br><br>
 <b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Start mirroring to Google Drive. Send <b>/{BotCommands.MirrorCommand}</b> for more help
@@ -190,7 +191,6 @@ help_string_telegraph = f'''<br>
 <br><br>
 <b>/{BotCommands.DeleteCommand}</b> [drive_url]: Delete file/folder from Google Drive (Only Owner & Sudo)
 <br><br>
-<b>/{BotCommands.WatchCommand}</b> [yt-dlp supported link]: Mirror yt-dlp supported link. Send <b>/{BotCommands.WatchCommand}</b> for more help
 <br><br>
 <b>/{BotCommands.ZipWatchCommand}</b> [yt-dlp supported link]: Mirror yt-dlp supported link as zip
 <br><br>
@@ -223,7 +223,9 @@ help_string_telegraph = f'''<br>
 <b>/{BotCommands.StatusCommand}</b>: Shows a status of all the downloads
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
+<br><br>
 '''
+
 
 help = telegraph.create_page(
         title='Lionel Messi Bot Help',
