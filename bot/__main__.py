@@ -145,12 +145,14 @@ def aboutcc(update, context):
     query.answer(text=infoss, show_alert=True)
     
 def aboutcy(update, context):
+    mid = update.message
     query = update.callback_query
     message = query.message
     user_id = query.from_user.id
     data = query.data
     data = data.split()
     query.answer(text='Closing')
+    
     query.delete_message()
 
 def log(update, context):
