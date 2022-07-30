@@ -33,6 +33,18 @@ def sendCmes(channelid: int,text, bot, message: Message):
         LOGGER.error(str(e))
         return
 
+      
+def delMessage(chat_id, message_id, bot, message: Message):
+    try:
+        return bot.delete_message(chat_id=chat_id,message_id=message_id)
+    except RetryAfter as r:
+        LOGGER.warning(str(r))
+        sleep(r.retry_after * 1.5)
+        return delMessage(chat_id, message_id, bot,message)
+    except Exception as e:
+        LOGGER.error(str(e))
+        return 
+
 
 def sendMarkup(text: str, bot, message: Message, reply_markup: InlineKeyboardMarkup):
     try:
