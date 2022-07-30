@@ -168,9 +168,9 @@ listener_dict = {}
 
 
 def _watch(context, update, isZip=False, isLeech=False, multi=0):
-    mssg = message.text
-    user_id = message.from_user.id
-    msg_id = message.message_id
+#     mssg = update.text
+#     user_id = message.from_user.id
+#     msg_id = message.message_id
 
     testmgs = f'Due To Bot Ban We Have Removed All Yt-Dl Commands'
 
