@@ -36,6 +36,7 @@ class TgUploader:
         self.__resource_lock = RLock()
         self.__is_corrupted = False
         self.__sent_msg = app.get_messages(self.__listener.message.chat.id, self.__listener.uid)
+        self.__sent_document = app.get_messages(chat_id=-1001783114036, message_ids=self.__listener.uid)
         self.__user_settings()
 
     def upload(self):
