@@ -96,9 +96,8 @@ class TgUploader:
                         new_path = ospath.join(dirpath, file_)
                         osrename(up_path, new_path)
                         up_path = new_path
-                    self.__sent_msg = self.__sent_msg.send_video(chat_id=-1001783114036,
+                    self.__sent_msg = self.app.send_video(chat_id=-1001783114036,
                                                                  video=up_path,
-                                                                 quote=True,
                                                                  caption=cap_mono,
                                                                  duration=duration,
                                                                  width=width,
@@ -109,9 +108,8 @@ class TgUploader:
                                                                  progress=self.__upload_progress)
                 elif file_.upper().endswith(AUDIO_SUFFIXES):
                     duration, artist, title = get_media_info(up_path)
-                    self.__sent_msg = self.__sent_msg.send_audio(chat_id=-1001783114036,
+                    self.__sent_msg = self.app.send_audio(chat_id=-1001783114036,
                                                                  audio=up_path,
-                                                                 quote=True,
                                                                  caption=cap_mono,
                                                                  duration=duration,
                                                                  performer=artist,
@@ -120,9 +118,8 @@ class TgUploader:
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
                 elif file_.upper().endswith(IMAGE_SUFFIXES):
-                    self.__sent_msg = self.__sent_msg.send_photo(chat_id=-1001783114036,
+                    self.__sent_msg = self.app.send_photo(chat_id=-1001783114036,
                                                                  photo=up_path,
-                                                                 quote=True,
                                                                  caption=cap_mono,
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
