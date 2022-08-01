@@ -136,7 +136,7 @@ class TgUploader:
                         if self.__thumb is None and thumb is not None and ospath.lexists(thumb):
                             osremove(thumb)
                         return
-                self.__sent_msg = self.send_document(chat_id=-1001783114036,
+                self.__sent_msg = self.__send_document(chat_id=-1001783114036,
                                                                 document=up_path,
                                                                 quote=True,
                                                                 thumb=thumb,
