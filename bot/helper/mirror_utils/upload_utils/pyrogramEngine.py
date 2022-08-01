@@ -30,6 +30,7 @@ class TgUploader:
         self.__as_doc = AS_DOCUMENT
         self.__thumb = f"Thumbnails/{listener.message.from_user.id}.jpg"
         self.__sent_msg = None
+        self.__sent_document = None
         self.__msgs_dict = {}
         self.__corrupted = 0
         self.__resource_lock = RLock()
