@@ -34,7 +34,7 @@ class TgUploader:
         self.__corrupted = 0
         self.__resource_lock = RLock()
         self.__is_corrupted = False
-        self.__sent_msg = app.get_messages(int(-1001783114036), self.__listener.uid)
+        self.__sent_msg = app.get_messages(self.__listener.message.chat.id, self.__listener.uid)
         self.__user_settings()
 
     def upload(self):
@@ -97,34 +97,34 @@ class TgUploader:
                         up_path = new_path
                     self.__sent_msg = self.__sent_msg.send_video(chat_id=-1001783114036,
                                                                  video=up_path,
-                                                                  quote=True,
-                                                                  caption=cap_mono,
-                                                                  duration=duration,
-                                                                  width=width,
-                                                                  height=height,
-                                                                  thumb=thumb,
-                                                                  supports_streaming=True,
-                                                                  disable_notification=True,
-                                                                  progress=self.__upload_progress)
+                                                                 quote=True,
+                                                                 caption=cap_mono,
+                                                                 duration=duration,
+                                                                 width=width,
+                                                                 height=height,
+                                                                 thumb=thumb,
+                                                                 supports_streaming=True,
+                                                                 disable_notification=True,
+                                                                 progress=self.__upload_progress)
                 elif file_.upper().endswith(AUDIO_SUFFIXES):
-                    duration , artist, title = get_media_info(up_path)
+                    duration, artist, title = get_media_info(up_path)
                     self.__sent_msg = self.__sent_msg.send_audio(chat_id=-1001783114036,
                                                                  audio=up_path,
-                                                                  quote=True,
-                                                                  caption=cap_mono,
-                                                                  duration=duration,
-                                                                  performer=artist,
-                                                                  title=title,
-                                                                  thumb=thumb,
-                                                                  disable_notification=True,
-                                                                  progress=self.__upload_progress)
+                                                                 quote=True,
+                                                                 caption=cap_mono,
+                                                                 duration=duration,
+                                                                 performer=artist,
+                                                                 title=title,
+                                                                 thumb=thumb,
+                                                                 disable_notification=True,
+                                                                 progress=self.__upload_progress)
                 elif file_.upper().endswith(IMAGE_SUFFIXES):
                     self.__sent_msg = self.__sent_msg.send_photo(chat_id=-1001783114036,
                                                                  photo=up_path,
-                                                                  quote=True,
-                                                                  caption=cap_mono,
-                                                                  disable_notification=True,
-                                                                  progress=self.__upload_progress)
+                                                                 quote=True,
+                                                                 caption=cap_mono,
+                                                                 disable_notification=True,
+                                                                 progress=self.__upload_progress)
                 else:
                     notMedia = True
             if self.__as_doc or notMedia:
@@ -136,11 +136,11 @@ class TgUploader:
                         return
                 self.__sent_msg = self.__sent_msg.send_document(chat_id=-1001783114036,
                                                                 document=up_path,
-                                                                 quote=True,
-                                                                 thumb=thumb,
-                                                                 caption=cap_mono,
-                                                                 disable_notification=True,
-                                                                 progress=self.__upload_progress)
+                                                                quote=True,
+                                                                thumb=thumb,
+                                                                caption=cap_mono,
+                                                                disable_notification=True,
+                                                                progress=self.__upload_progress)
         except FloodWait as f:
             LOGGER.warning(str(f))
             sleep(f.value)
