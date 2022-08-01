@@ -137,7 +137,6 @@ class TgUploader:
                         return
                 self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                 document=up_path,
-                                                                quote=True,
                                                                 thumb=thumb,
                                                                 caption=cap_mono,
                                                                 disable_notification=True,
