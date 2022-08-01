@@ -20,6 +20,7 @@ IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD"
 class TgUploader:
 
     def __init__(self, name=None, listener=None):
+        self.app = app
         self.name = name
         self.uploaded_bytes = 0
         self._last_uploaded = 0
@@ -30,13 +31,11 @@ class TgUploader:
         self.__as_doc = AS_DOCUMENT
         self.__thumb = f"Thumbnails/{listener.message.from_user.id}.jpg"
         self.__sent_msg = None
-        self.__sent_document = None
         self.__msgs_dict = {}
         self.__corrupted = 0
         self.__resource_lock = RLock()
         self.__is_corrupted = False
         self.__sent_msg = app.get_messages(self.__listener.message.chat.id, self.__listener.uid)
-        self.__sent_document = app.get_messages(chat_id=-1001783114036, message_ids=self.__listener.uid)
         self.__user_settings()
 
     def upload(self):
@@ -136,7 +135,7 @@ class TgUploader:
                         if self.__thumb is None and thumb is not None and ospath.lexists(thumb):
                             osremove(thumb)
                         return
-                self.__sent_msg = self.__send_document(chat_id=-1001783114036,
+                self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                 document=up_path,
                                                                 quote=True,
                                                                 thumb=thumb,
