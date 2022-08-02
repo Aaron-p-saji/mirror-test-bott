@@ -156,7 +156,7 @@ class MirrorListener:
             LOGGER.info(f"Leech Name: {up_name}")
             tg = TgUploader(up_name, self)
             tg_upload_status = TgUploadStatus(tg, size, gid, self)
-            LOGGER.info(f"Upload ID: {tg.listener.message_id}")
+            LOGGER.info(f"Upload ID: {tg.__listener.message_id}")
             with download_dict_lock:
                 download_dict[self.uid] = tg_upload_status
             update_all_messages()
