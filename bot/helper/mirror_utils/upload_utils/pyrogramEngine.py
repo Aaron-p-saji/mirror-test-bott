@@ -60,7 +60,7 @@ class TgUploader:
         if self.__total_files <= self.__corrupted:
             return self.__listener.onUploadError('Files Corrupted. Check logs')
         LOGGER.info(f"Leech Completed: {self.name}")
-        LOGGER.info(f"Test : {self.__listener.message_id}")
+        LOGGER.info(f"Test : {self.__listener.message.message_id}")
         self.__listener.onUploadComplete(None, size, self.__msgs_dict, self.__total_files, self.__corrupted, self.name)
 
     def upload_file(self, up_path, file_, dirpath):
