@@ -195,8 +195,9 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
+            download = download_dict[self.uid]
             msg += f'\n<b>Total Files: </b>{folders}'
-            msg += f'\nfileid = {fid_lech}'
+            msg += f'\n fid ={download.gid()}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
