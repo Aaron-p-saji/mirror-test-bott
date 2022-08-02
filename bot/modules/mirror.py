@@ -191,21 +191,20 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
 
     def onUploadComplete(self, bot, message, link: str, size, files, folders, typ, name: str):
-      media = self.audio or \
-        self.document or \
-        self.photo or \
-        self.sticker or \
-        self.video or \
-        self.animation or \
-        self.voice or \
-        self.video_note
+        media = bot.audio or \
+                bot.document or \
+                bot.photo or \
+                bot.sticker or \
+                bot.video or \
+                bot.animation or \
+                bot.voice or \
+                bot.video_note
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
-            msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
+        msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            download = download_dict[self.uid]
             msg += f'\n<b>Total Files: </b>{folders}'
-            msg += f'\n fid ={media.file_id}'
+            msg += f'\n fid = {media.file_id}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
@@ -241,8 +240,9 @@ class MirrorListener:
                     if VIEW_LINK:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
                         buttons.buildbutton("🌐 View Link", share_urls)
+                        buttons.buildbutton("👑 OWNER 👑", "https://t.me/RubyMathews_Bot")
                         buttons.buildbutton("📊 BOT STATUS", "https://t.me/gDriveStatus")
-                        buttons.buildbutton("🔑 Drive Access 🔑", "https://groups.google.com/g/gdrive-bot")
+
             sendMarkup(msg, self.bot, self.message, InlineKeyboardMarkup(buttons.build_menu(2)))
             if self.isQbit and QB_SEED and not self.extract:
                 if self.isZip:
