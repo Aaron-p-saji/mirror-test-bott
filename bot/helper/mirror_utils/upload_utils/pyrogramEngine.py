@@ -72,7 +72,8 @@ class TgUploader:
         else:
             cap_mono = f'''
             <code>{file_}</code>
-            This File Was Uploaded From gDrive Link Channel
+This File Was Uploaded From gDrive Link Channel
+{self.__sent_msg.id}
 '''
         notMedia = False
         thumb = self.__thumb
@@ -141,7 +142,6 @@ class TgUploader:
                                                                  caption=cap_mono,
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
-                cap_mono += f'{self.__sent_msg.id}'
         except FloodWait as f:
             LOGGER.warning(str(f))
             sleep(f.value)
