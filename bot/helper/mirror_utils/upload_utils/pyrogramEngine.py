@@ -4,7 +4,6 @@ from time import time, sleep
 from pyrogram.errors import FloodWait, RPCError
 from PIL import Image
 from threading import RLock
-from telegram import Update
 
 from bot import DOWNLOAD_DIR, AS_DOCUMENT, AS_DOC_USERS, AS_MEDIA_USERS, CUSTOM_FILENAME, EXTENSION_FILTER, app
 from bot.helper.ext_utils.fs_utils import take_ss, get_media_info, get_path_size
@@ -141,7 +140,7 @@ This File Was Uploaded From gDrive Link Channel
                 self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                  document=up_path,
                                                                  thumb=thumb,
-                                                                 caption=f'id: {update.message.document.file_id}',
+                                                                 caption=f'id: {Document.file_id}',
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
         except FloodWait as f:
