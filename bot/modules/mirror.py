@@ -205,7 +205,7 @@ class MirrorListener:
         if self.isLeech:
             download = download_dict[self.uid]
             msg += f'\n<b>Total Files: </b>{folders}'
-            msg += f'\n fid ={media.file_id}'
+            msg += f'\n fid ={self.message.link}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
