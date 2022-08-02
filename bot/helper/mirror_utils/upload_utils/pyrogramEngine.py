@@ -140,7 +140,7 @@ This File Was Uploaded From gDrive Link Channel
                 self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                  document=up_path,
                                                                  thumb=thumb,
-                                                                 caption=f'id: {self.app.Message.document.file_id}',
+                                                                 caption=f'id: {self.app.message.document.file_id}',
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
         except FloodWait as f:
