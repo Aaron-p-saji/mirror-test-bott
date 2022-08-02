@@ -9,7 +9,7 @@ from subprocess import run as srun
 from pathlib import PurePath
 from html import escape
 from telegram.ext import CommandHandler
-from telegram import InlineKeyboardMarkup, Message, Update
+from telegram import InlineKeyboardMarkup, File
 
 from bot import Interval, INDEX_URL, VIEW_LINK, aria2, QB_SEED, dispatcher, DOWNLOAD_DIR, \
                 download_dict, download_dict_lock, TG_SPLIT_SIZE, LOGGER, MEGA_KEY, DB_URI, INCOMPLETE_TASK_NOTIFIER
@@ -34,16 +34,6 @@ from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, delete_all_messages, update_all_messages
 from bot.helper.telegram_helper.button_build import ButtonMaker
 from bot.helper.ext_utils.db_handler import DbManger
-
-message = Update.message
-media = message.audio or \
-        message.document or \
-        message.photo or \
-        message.sticker or \
-        message.video or \
-        message.animation or \
-        message.voice or \
-        message.video_note
 
 class MirrorListener:
     def __init__(self, bot, message, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None, tag=None):
@@ -200,13 +190,12 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
 
     def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
-        global message, media
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
             msg += f'\n<b>Total Files: </b>{folders}'
-            msg += f'\n fid = {media.file_id}'
+            msg += f'\n fid = {File.file_id}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
