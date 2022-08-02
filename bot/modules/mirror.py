@@ -191,18 +191,17 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
 
     def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
-      media = message.audio or \
-            message.document or \
-            message.photo or \
-            message.sticker or \
-            message.video or \
-            message.animation or \
-            message.voice or \
-            message.video_note
-      
+        media = message.audio or \
+        message.document or \
+        message.photo or \
+        message.sticker or \
+        message.video or \
+        message.animation or \
+        message.voice or \
+        message.video_note
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
-        msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
+            msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
             download = download_dict[self.uid]
             msg += f'\n<b>Total Files: </b>{folders}'
