@@ -190,15 +190,15 @@ class MirrorListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
 
-    def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
-        media = self.audio or \
-        self.document or \
-        self.photo or \
-        self.sticker or \
-        self.video or \
-        self.animation or \
-        self.voice or \
-        self.video_note
+    def onUploadComplete(self, bot, message link: str, size, files, folders, typ, name: str):
+        media = self.message.audio or \
+        self.message.document or \
+        self.message.photo or \
+        self.message.sticker or \
+        self.message.video or \
+        self.message.animation or \
+        self.message.voice or \
+        self.message.video_note
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
             msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
