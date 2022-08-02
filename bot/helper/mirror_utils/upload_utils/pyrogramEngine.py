@@ -153,8 +153,6 @@ class TgUploader:
             osremove(thumb)
         if not self.__is_cancelled:
             osremove(up_path)
-            
-        fid_lech = self.__sent_msg.file.id
 
     def __upload_progress(self, current, total):
         if self.__is_cancelled:
