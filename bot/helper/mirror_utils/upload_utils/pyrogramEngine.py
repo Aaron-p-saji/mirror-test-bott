@@ -39,7 +39,6 @@ class TgUploader:
         self.__user_settings()
 
     def upload(self):
-        fidd = self.__sent_msg.file.id
         path = f"{DOWNLOAD_DIR}{self.__listener.uid}"
         size = get_readable_file_size(get_path_size(path))
         for dirpath, subdir, files in sorted(walk(path)):
