@@ -9,7 +9,7 @@ from subprocess import run as srun
 from pathlib import PurePath
 from html import escape
 from telegram.ext import CommandHandler
-from telegram import InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardMarkup
 
 from bot import Interval, INDEX_URL, VIEW_LINK, aria2, QB_SEED, dispatcher, DOWNLOAD_DIR, \
                 download_dict, download_dict_lock, TG_SPLIT_SIZE, LOGGER, MEGA_KEY, DB_URI, INCOMPLETE_TASK_NOTIFIER
@@ -190,15 +190,15 @@ class MirrorListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
 
-    def onUploadComplete(self, message, link: str, size, files, folders, typ, name: str):
-        media = message.audio or \
-        message.document or \
-        message.photo or \
-        message.sticker or \
-        message.video or \
-        message.animation or \
-        message.voice or \
-        message.video_note
+    def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
+        media = self.audio or \
+        self.document or \
+        self.photo or \
+        self.sticker or \
+        self.video or \
+        self.animation or \
+        self.voice or \
+        self.video_note
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
             msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
