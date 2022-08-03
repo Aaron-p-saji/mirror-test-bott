@@ -113,7 +113,8 @@ class TelegramDownloadHelper:
                 self.__onDownloadStart(name, size, media.file_unique_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
-                sendMessage(f'Downloading Telegram file with id: {media.file_id}, self.__listener.bot, self.__listener.message)
+                mmg = f'Downloading Telegram file with id: {media.file_id}'
+                sendMessage(mmg, self.__listener.bot, self.__listener.message)
                 self.__download(_dmsg, path)
             else:
                 self.__onDownloadError('File already being downloaded!')
