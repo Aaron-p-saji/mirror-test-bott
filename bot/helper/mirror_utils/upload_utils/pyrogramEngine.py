@@ -26,6 +26,7 @@ class TgUploader:
         self.uploaded_bytes = 0
         self._last_uploaded = 0
         self.__listener = listener
+        self.message = Message
         self.__start_time = time()
         self.__total_files = 0
         self.__is_cancelled = False
