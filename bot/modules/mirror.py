@@ -41,6 +41,8 @@ from bot.helper.telegram_helper.button_build import ButtonMaker
 from bot.helper.ext_utils.db_handler import DbManger
 
 
+code_bb = str(randrange(51586, 867461635496887981))
+
 class MirrorListener:
     def __init__(self, bot, message, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None, tag=None):
         self.bot = bot
@@ -200,12 +202,11 @@ class MirrorListener:
 
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', str(randrange(51586, 867461635496887981)))
+            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', )
             btn = ButtonMaker()
             btn.sbutton("Get File", url1)
             tg1 = TelegramDownloadHelper
             msg += f'\n<b>Total Files: </b>{folders}'
-            msg += f'{tg1.fid}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
@@ -499,7 +500,7 @@ def qb_zip_leech(update, context):
     _mirror(context.bot, update.message, True, isQbit=True, isLeech=True)
 
 
-file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(FFID))
+file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(code_bb))
 mirror_handler = CommandHandler(BotCommands.MirrorCommand, mirror,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
