@@ -9,7 +9,7 @@ from subprocess import run as srun
 from pathlib import PurePath
 from html import escape
 from telegram.ext import CommandHandler
-from telegram import InlineKeyboardMarkup, File
+from telegram import InlineKeyboardMarkup, File, Message
 
 from bot import Interval, INDEX_URL, VIEW_LINK, aria2, QB_SEED, dispatcher, DOWNLOAD_DIR, \
                 download_dict, download_dict_lock, TG_SPLIT_SIZE, LOGGER, MEGA_KEY, DB_URI, INCOMPLETE_TASK_NOTIFIER
@@ -61,7 +61,7 @@ class MirrorListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().add_incomplete_task(self.message.chat.id, self.message.link, self.tag)
 
-    def onDownloadComplete(self):
+    def onDownloadComplete(self, context, message: Message):
         with download_dict_lock:
             LOGGER.info(f"Download completed: {download_dict[self.uid].name()}")
             download = download_dict[self.uid]
