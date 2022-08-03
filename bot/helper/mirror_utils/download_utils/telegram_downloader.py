@@ -19,7 +19,7 @@ class TelegramDownloadHelper:
     def __init__(self, listener):
         global fid
 
-        fid = self.__id
+        
         self.name = ""
         self.size = 0
         self.progress = 0
@@ -27,6 +27,7 @@ class TelegramDownloadHelper:
         self.__start_time = time()
         self.__listener = listener
         self.__id = ""
+        fid = self.__id
         self.__is_cancelled = False
         self.__resource_lock = RLock()
 
