@@ -284,7 +284,7 @@ class MirrorListener:
 def getfile(update, context: CallbackContext):
     user = update.message.from_user
 
-    Client.send_cached_media(chat_id=user.id, file_id=str''.join(str(x) for x in SSID))
+    Client.send_cached_media(chat_id=user.id, file_id=str(''.join(str(x) for x in SSID)))
     # FFID.clear()
 
 
