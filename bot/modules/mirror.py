@@ -25,7 +25,7 @@ from bot.helper.mirror_utils.download_utils.gd_downloader import add_gd_download
 from bot.helper.mirror_utils.download_utils.qbit_downloader import QbDownloader
 from bot.helper.mirror_utils.download_utils.mega_downloader import MegaDownloader
 from bot.helper.mirror_utils.download_utils.direct_link_generator import direct_link_generator
-from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper, FFID
+from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper, FFID, SSID
 from bot.helper.mirror_utils.status_utils.extract_status import ExtractStatus
 from bot.helper.mirror_utils.status_utils.zip_status import ZipStatus
 from bot.helper.mirror_utils.status_utils.split_status import SplitStatus
@@ -39,9 +39,6 @@ from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, de
     sendCmes
 from bot.helper.telegram_helper.button_build import ButtonMaker
 from bot.helper.ext_utils.db_handler import DbManger
-
-
-code_bb = str(randrange(51586, 867461635496887981))
 
 class MirrorListener:
     def __init__(self, bot, message, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None, tag=None):
@@ -202,7 +199,7 @@ class MirrorListener:
 
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', )
+            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', str(SSID))
             btn = ButtonMaker()
             btn.sbutton("Get File", url1)
             tg1 = TelegramDownloadHelper
@@ -500,7 +497,7 @@ def qb_zip_leech(update, context):
     _mirror(context.bot, update.message, True, isQbit=True, isLeech=True)
 
 
-file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(code_bb))
+file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(str(SSID)))
 mirror_handler = CommandHandler(BotCommands.MirrorCommand, mirror,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
