@@ -89,7 +89,7 @@ class TelegramDownloadHelper:
                 media = i
                 break
         if media is not None:
-            SSID.append(media.file_unique_id)
+            SSID.append(media.file_id)
             with global_lock:
                 # For avoiding locking the thread lock for long time unnecessarily
                 download = media.file_unique_id not in GLOBAL_GID
