@@ -51,7 +51,7 @@ class TgUploader:
                         LOGGER.error(f"{up_path} size is zero, telegram don't upload zero size files")
                         self.__corrupted += 1
                         continue
-                    self.upload_file(up_path, file_, dirpath, message)
+                    self.upload_file(up_path, file_, dirpath, Message)
                     if self.__is_cancelled:
                         return
                     if not self.__listener.isPrivate and not self.__is_corrupted:
