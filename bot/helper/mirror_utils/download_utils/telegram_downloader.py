@@ -73,7 +73,7 @@ class TelegramDownloadHelper:
             LOGGER.error(str(e))
             return self.__onDownloadError(str(e))
         if download is not None:
-            self.__onDownloadComplete()
+            self.__onDownloadComplete(context, message)
         elif not self.__is_cancelled:
             self.__onDownloadError('Internal error occurred')
 
@@ -105,7 +105,7 @@ class TelegramDownloadHelper:
                         return sendMarkup(msg, self.__listener.bot, self.__listener.message, button)
                 self.__onDownloadStart(name, size, media.file_unique_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
-                self.__download(_dmsg, path)
+                self.__download(_dmsg, path, , context, message)
             else:
                 self.__onDownloadError('File already being downloaded!')
         else:
