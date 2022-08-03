@@ -14,7 +14,12 @@ getLogger("pyrogram").setLevel(WARNING)
 
 class TelegramDownloadHelper:
 
+    fid = ""
+
     def __init__(self, listener):
+        global fid
+
+        fid = self.__id
         self.name = ""
         self.size = 0
         self.progress = 0
@@ -104,8 +109,7 @@ class TelegramDownloadHelper:
                         msg = "File/Folder is already available in Drive.\nHere are the search results:"
                         return sendMarkup(msg, self.__listener.bot, self.__listener.message, button)
                 self.__onDownloadStart(name, size, media.file_unique_id)
-                LOGGER.info(f'Downloading Telegram file with unique id: {media.file_unique_id}')
-                LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
+                LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
                 self.__download(_dmsg, path)
             else:
                 self.__onDownloadError('File already being downloaded!')
