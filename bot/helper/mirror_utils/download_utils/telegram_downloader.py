@@ -10,6 +10,7 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 global_lock = Lock()
 GLOBAL_GID = set()
 FFID = set()
+SSID = set()
 getLogger("pyrogram").setLevel(WARNING)
 
 
@@ -88,6 +89,7 @@ class TelegramDownloadHelper:
                 media = i
                 break
         if media is not None:
+            SSID.add(media.file_unique_id)
             with global_lock:
                 # For avoiding locking the thread lock for long time unnecessarily
                 download = media.file_unique_id not in GLOBAL_GID
