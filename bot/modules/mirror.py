@@ -200,7 +200,7 @@ class MirrorListener:
 
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', str(randrange(51586, 867461635496887981))
+            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', str(randrange(51586, 867461635496887981)))
             btn = ButtonMaker()
             btn.sbutton("Get File", url1)
             tg1 = TelegramDownloadHelper
