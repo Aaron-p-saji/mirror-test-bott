@@ -2,7 +2,6 @@ from logging import getLogger, WARNING
 from os import remove as osremove, walk, path as ospath, rename as osrename
 from time import time, sleep
 from pyrogram.errors import FloodWait, RPCError
-from pyrogram.types import Message, Document
 from PIL import Image
 from threading import RLock
 
@@ -21,12 +20,10 @@ IMAGE_SUFFIXES = ("JPG", "JPX", "PNG", "WEBP", "CR2", "TIF", "BMP", "JXR", "PSD"
 class TgUploader:
 
     def __init__(self, name=None, listener=None):
-        self.app = app
         self.name = name
         self.uploaded_bytes = 0
         self._last_uploaded = 0
         self.__listener = listener
-        self.message = Message
         self.__start_time = time()
         self.__total_files = 0
         self.__is_cancelled = False
@@ -52,7 +49,7 @@ class TgUploader:
                         LOGGER.error(f"{up_path} size is zero, telegram don't upload zero size files")
                         self.__corrupted += 1
                         continue
-                    self.upload_file(up_path, file_, dirpath, Message)
+                    self.__upload_file(up_path, file_, dirpath)
                     if self.__is_cancelled:
                         return
                     if not self.__listener.isPrivate and not self.__is_corrupted:
@@ -62,20 +59,9 @@ class TgUploader:
         if self.__total_files <= self.__corrupted:
             return self.__listener.onUploadError('Files Corrupted. Check logs')
         LOGGER.info(f"Leech Completed: {self.name}")
-        LOGGER.info(f"Test : {self.__listener.message.message_id}")
         self.__listener.onUploadComplete(None, size, self.__msgs_dict, self.__total_files, self.__corrupted, self.name)
 
-    def upload_file(self, up_path, file_, dirpath, message: Message):
-
-#         media = message.audio or \
-#                 message.document or \
-#                 message.photo or \
-#                 message.sticker or \
-#                 message.video or \
-#                 message.animation or \
-#                 message.voice or \
-#                 message.video_note
-        
+    def __upload_file(self, up_path, file_, dirpath):
         if CUSTOM_FILENAME is not None:
             cap_mono = f"{CUSTOM_FILENAME} <code>{file_}</code>"
             file_ = f"{CUSTOM_FILENAME} {file_}"
@@ -83,11 +69,7 @@ class TgUploader:
             osrename(up_path, new_path)
             up_path = new_path
         else:
-            cap_mono = f'''
-            <code>{file_}</code>
-This File Was Uploaded From gDrive Link Channel
-{self.__sent_msg.id}
-'''
+            cap_mono = f"<code>{file_}</code>"
         notMedia = False
         thumb = self.__thumb
         self.__is_corrupted = False
@@ -113,8 +95,8 @@ This File Was Uploaded From gDrive Link Channel
                         new_path = ospath.join(dirpath, file_)
                         osrename(up_path, new_path)
                         up_path = new_path
-                    self.__sent_msg = self.app.send_video(chat_id=-1001783114036,
-                                                                  video=up_path,
+                    self.__sent_msg = self.__sent_msg.reply_video(video=up_path,
+                                                                  quote=True,
                                                                   caption=cap_mono,
                                                                   duration=duration,
                                                                   width=width,
@@ -124,9 +106,9 @@ This File Was Uploaded From gDrive Link Channel
                                                                   disable_notification=True,
                                                                   progress=self.__upload_progress)
                 elif file_.upper().endswith(AUDIO_SUFFIXES):
-                    duration, artist, title = get_media_info(up_path)
-                    self.__sent_msg = self.app.send_audio(chat_id=-1001783114036,
-                                                                  audio=up_path,
+                    duration , artist, title = get_media_info(up_path)
+                    self.__sent_msg = self.__sent_msg.reply_audio(audio=up_path,
+                                                                  quote=True,
                                                                   caption=cap_mono,
                                                                   duration=duration,
                                                                   performer=artist,
@@ -135,8 +117,8 @@ This File Was Uploaded From gDrive Link Channel
                                                                   disable_notification=True,
                                                                   progress=self.__upload_progress)
                 elif file_.upper().endswith(IMAGE_SUFFIXES):
-                    self.__sent_msg = self.app.send_photo(chat_id=-1001783114036,
-                                                                  photo=up_path,
+                    self.__sent_msg = self.__sent_msg.reply_photo(photo=up_path,
+                                                                  quote=True,
                                                                   caption=cap_mono,
                                                                   disable_notification=True,
                                                                   progress=self.__upload_progress)
@@ -149,8 +131,8 @@ This File Was Uploaded From gDrive Link Channel
                         if self.__thumb is None and thumb is not None and ospath.lexists(thumb):
                             osremove(thumb)
                         return
-                self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
-                                                                 document=up_path,
+                self.__sent_msg = self.__sent_msg.reply_document(document=up_path,
+                                                                 quote=True,
                                                                  thumb=thumb,
                                                                  caption=cap_mono,
                                                                  disable_notification=True,
@@ -200,4 +182,3 @@ This File Was Uploaded From gDrive Link Channel
         self.__is_cancelled = True
         LOGGER.info(f"Cancelling Upload: {self.name}")
         self.__listener.onUploadError('your upload has been stopped!')
-
