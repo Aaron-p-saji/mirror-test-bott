@@ -9,7 +9,6 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 
 global_lock = Lock()
 GLOBAL_GID = set()
-FFID = list
 getLogger("pyrogram").setLevel(WARNING)
 
 
