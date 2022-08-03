@@ -61,19 +61,19 @@ class TelegramDownloadHelper:
                 pass
         self.__listener.onDownloadError(error)
 
-    def __onDownloadComplete(self, context, message):
+    def __onDownloadComplete(self):
         with global_lock:
             GLOBAL_GID.remove(self.__id)
         self.__listener.onDownloadComplete()
 
-    def __download(self, message, path, context):
+    def __download(self, message, path):
         try:
             download = message.download(file_name=path, progress=self.__onDownloadProgress)
         except Exception as e:
             LOGGER.error(str(e))
             return self.__onDownloadError(str(e))
         if download is not None:
-            self.__onDownloadComplete(context, message)
+            self.__onDownloadComplete()
         elif not self.__is_cancelled:
             self.__onDownloadError('Internal error occurred')
 
@@ -104,8 +104,9 @@ class TelegramDownloadHelper:
                         msg = "File/Folder is already available in Drive.\nHere are the search results:"
                         return sendMarkup(msg, self.__listener.bot, self.__listener.message, button)
                 self.__onDownloadStart(name, size, media.file_unique_id)
-                LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
-                self.__download(_dmsg, path, context, message)
+                LOGGER.info(f'Downloading Telegram file with unique id: {media.file_unique_id}')
+                LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
+                self.__download(_dmsg, path)
             else:
                 self.__onDownloadError('File already being downloaded!')
         else:
