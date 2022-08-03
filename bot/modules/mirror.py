@@ -208,7 +208,7 @@ class MirrorListener:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
             if not files:
-                sendMarkup(msg, self.bot, self.message, )
+                sendMarkup(msg, self.bot, self.message, btn)
             else:
                 fmsg = ''
                 for index, (link, name) in enumerate(files.items(), start=1):
