@@ -66,7 +66,7 @@ class TelegramDownloadHelper:
             GLOBAL_GID.remove(self.__id)
         self.__listener.onDownloadComplete()
 
-    def __download(self, message, path):
+    def __download(self, message, path, context):
         try:
             download = message.download(file_name=path, progress=self.__onDownloadProgress)
         except Exception as e:
