@@ -109,7 +109,7 @@ class TelegramDownloadHelper:
                         return sendMarkup(msg, self.__listener.bot, self.__listener.message, button)
                 self.__onDownloadStart(name, size, media.file_unique_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
-                LOGGER.info(f'Downloading Telegram file with uid: {''.join(str(x) for x in SSID)}')
+                LOGGER.info(f'Downloading Telegram file with uid: {\'\'.join(str(x) for x in SSID)}')
                 self.__download(_dmsg, path)
             else:
                 self.__onDownloadError('File already being downloaded!')
