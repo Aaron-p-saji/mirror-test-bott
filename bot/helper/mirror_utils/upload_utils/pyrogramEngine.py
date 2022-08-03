@@ -2,8 +2,7 @@ from logging import getLogger, WARNING
 from os import remove as osremove, walk, path as ospath, rename as osrename
 from time import time, sleep
 from pyrogram.errors import FloodWait, RPCError
-# from pyrogram.types import Message, Document
-from telegram import Message
+from pyrogram.types import Message, Document
 from PIL import Image
 from threading import RLock
 
@@ -152,7 +151,7 @@ This File Was Uploaded From gDrive Link Channel
                 self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                  document=up_path,
                                                                  thumb=thumb,
-                                                                 caption=f'id : {message.document.file_id}',
+                                                                 caption=f'id : {message.message.document.file_id}',
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
         except FloodWait as f:
