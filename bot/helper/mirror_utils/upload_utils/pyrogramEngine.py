@@ -66,14 +66,14 @@ class TgUploader:
 
     def upload_file(self, up_path, file_, dirpath, message: Message):
 
-        media = message.audio or \
-                message.document or \
-                message.photo or \
-                message.sticker or \
-                message.video or \
-                message.animation or \
-                message.voice or \
-                message.video_note
+#         media = message.audio or \
+#                 message.document or \
+#                 message.photo or \
+#                 message.sticker or \
+#                 message.video or \
+#                 message.animation or \
+#                 message.voice or \
+#                 message.video_note
         
         if CUSTOM_FILENAME is not None:
             cap_mono = f"{CUSTOM_FILENAME} <code>{file_}</code>"
