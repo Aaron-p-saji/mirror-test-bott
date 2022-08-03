@@ -193,15 +193,18 @@ class MirrorListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
 
+def url(update, context):
+    url1 = helpers.create_deep_linked_url(context.bot.username, FFID)
+
     def onUploadComplete(self, link: str, size, files, folders, typ, name: str):
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
 
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            url = helpers.create_deep_linked_url(self.bot.username, FFID)
+
             btn = ButtonMaker()
-            btn.sbutton("Get File", url)
+            btn.sbutton("Get File", url1)
             tg1 = TelegramDownloadHelper
             msg += f'\n<b>Total Files: </b>{folders}'
             msg += f'{tg1.fid}'
