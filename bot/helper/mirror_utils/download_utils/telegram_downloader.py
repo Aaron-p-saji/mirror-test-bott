@@ -9,6 +9,7 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 
 global_lock = Lock()
 GLOBAL_GID = set()
+FFID = set()
 getLogger("pyrogram").setLevel(WARNING)
 
 
@@ -19,7 +20,7 @@ class TelegramDownloadHelper:
     def __init__(self, listener):
         global fid
 
-        
+        fid = self.__id
         self.name = ""
         self.size = 0
         self.progress = 0
@@ -27,7 +28,6 @@ class TelegramDownloadHelper:
         self.__start_time = time()
         self.__listener = listener
         self.__id = ""
-        fid = self.__id
         self.__is_cancelled = False
         self.__resource_lock = RLock()
 
@@ -37,6 +37,7 @@ class TelegramDownloadHelper:
             return self.downloaded_bytes / (time() - self.__start_time)
 
     def __onDownloadStart(self, name, size, file_id):
+        FFID.add(file_id)
         with global_lock:
             GLOBAL_GID.add(file_id)
         with self.__resource_lock:
@@ -111,9 +112,6 @@ class TelegramDownloadHelper:
                         return sendMarkup(msg, self.__listener.bot, self.__listener.message, button)
                 self.__onDownloadStart(name, size, media.file_unique_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
-                LOGGER.info(f'Downloading Telegram file with id: {media.file_id}')
-                mmg = f'Downloading Telegram file with id: {media.file_id}'
-                sendMessage(mmg, self.__listener.bot, self.__listener.message)
                 self.__download(_dmsg, path)
             else:
                 self.__onDownloadError('File already being downloaded!')
