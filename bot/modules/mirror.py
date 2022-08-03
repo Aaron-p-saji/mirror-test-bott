@@ -195,7 +195,9 @@ class MirrorListener:
             DbManger().rm_complete_task(self.message.link)
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
+            tg1 = TelegramDownloadHelper
             msg += f'\n<b>Total Files: </b>{folders}'
+            msg += f'{tg1.fid}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
             msg += f'\n<b>For: </b>{self.tag}\n\n'
