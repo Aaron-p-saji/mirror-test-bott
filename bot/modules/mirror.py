@@ -66,7 +66,7 @@ class MirrorListener:
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().add_incomplete_task(self.message.chat.id, self.message.link, self.tag)
 
-    def onDownloadComplete(self, message: Message, context):
+    def onDownloadComplete(self, message: Message):
         with download_dict_lock:
             LOGGER.info(f"Download completed: {download_dict[self.uid].name()}")
             download = download_dict[self.uid]
@@ -166,8 +166,6 @@ class MirrorListener:
             with download_dict_lock:
                 download_dict[self.uid] = tg_upload_status
             update_all_messages()
-            msid = message.document.file_id
-            sendCmes(-1001783114036, msid, context.bot, message)
             tg.upload()
         else:
             size = get_path_size(up_path)
