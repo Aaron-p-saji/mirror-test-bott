@@ -15,12 +15,7 @@ getLogger("pyrogram").setLevel(WARNING)
 
 class TelegramDownloadHelper:
 
-    fid = ""
-
     def __init__(self, listener):
-        global fid
-
-        fid = self.__id
         self.name = ""
         self.size = 0
         self.progress = 0
