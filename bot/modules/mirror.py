@@ -199,7 +199,7 @@ class MirrorListener:
 
         msg = f"<b>Name: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
         if self.isLeech:
-            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', str(SSID))
+            url1 = helpers.create_deep_linked_url('achuztestbot01_Bot', SSID[0])
             btn = ButtonMaker()
             btn.sbutton("Get File", url1)
             tg1 = TelegramDownloadHelper
@@ -497,7 +497,7 @@ def qb_zip_leech(update, context):
     _mirror(context.bot, update.message, True, isQbit=True, isLeech=True)
 
 
-file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(str(SSID)))
+file_handler = dhelp_handler = CommandHandler(BotCommands.StartCommand, getfile, Filters.regex(SSID[0]))
 mirror_handler = CommandHandler(BotCommands.MirrorCommand, mirror,
                                 filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 unzip_mirror_handler = CommandHandler(BotCommands.UnzipMirrorCommand, unzip_mirror,
