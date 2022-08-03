@@ -33,7 +33,7 @@ class TelegramDownloadHelper:
             return self.downloaded_bytes / (time() - self.__start_time)
 
     def __onDownloadStart(self, name, size, file_id):
-        FFID.add(file_id)
+        FFID.append(file_id)
         with global_lock:
             GLOBAL_GID.add(file_id)
         with self.__resource_lock:
@@ -89,7 +89,7 @@ class TelegramDownloadHelper:
                 media = i
                 break
         if media is not None:
-            SSID.add(media.file_unique_id)
+            SSID.append(media.file_unique_id)
             with global_lock:
                 # For avoiding locking the thread lock for long time unnecessarily
                 download = media.file_unique_id not in GLOBAL_GID
