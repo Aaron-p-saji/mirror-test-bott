@@ -63,7 +63,17 @@ class TgUploader:
         LOGGER.info(f"Test : {self.__listener.message.message_id}")
         self.__listener.onUploadComplete(None, size, self.__msgs_dict, self.__total_files, self.__corrupted, self.name)
 
-    def upload_file(self, up_path, file_, dirpath):
+    def upload_file(self, up_path, file_, dirpath, message: Message):
+
+        media = message.audio or \
+                message.document or \
+                message.photo or \
+                message.sticker or \
+                message.video or \
+                message.animation or \
+                message.voice or \
+                message.video_note
+        
         if CUSTOM_FILENAME is not None:
             cap_mono = f"{CUSTOM_FILENAME} <code>{file_}</code>"
             file_ = f"{CUSTOM_FILENAME} {file_}"
@@ -140,7 +150,7 @@ This File Was Uploaded From gDrive Link Channel
                 self.__sent_msg = self.app.send_document(chat_id=-1001783114036,
                                                                  document=up_path,
                                                                  thumb=thumb,
-                                                                 caption=f'up path {up_path}',
+                                                                 caption=f'id : {media.file_id}',
                                                                  disable_notification=True,
                                                                  progress=self.__upload_progress)
         except FloodWait as f:
